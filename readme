@@ -1,0 +1,28 @@
+Use the script with this powershell command:
+
+.\deploy.ps1 -NoCheckout -LocalPath "C:\Temp\website" -Publish -PublishPath "C:\Temp\publish" -FTPDeploy -FTPUri "ftp://127.0.0.1" -FTPFolderName "test/www.playtem.com"
+
+parameters list:
+
+#Svn
+[String] $SVNRepository,
+[Switch] $NoCheckout,
+
+#Compile
+[ValidateScript({Test-Path $_ -PathType 'Container'})]
+[String] $LocalPath,
+
+#Publish
+[Switch] $Publish,
+[String] $PublishPath = "$LocalPath\Build\Package",
+
+#Deploy	
+[Switch] $FTPDeploy,
+[String] $FTPUri,
+[String] $FTPUser = "Anonymous",
+[String] $FTPPassword = "anonymous@playtem.com",
+[String] $FTPFolderName, #Name of folder you want to create
+
+#Additional config
+[String] $Log = "C:\temp\ps\deploy.log",
+[String] $AppOffline = "D:\Work\_Playtem\Files\Code\app_offline.htm"
